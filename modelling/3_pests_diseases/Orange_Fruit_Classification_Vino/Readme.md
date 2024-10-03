@@ -8,6 +8,7 @@ This project focuses on the classification of orange fruit diseases using deep l
 - [Dataset Details](#dataset-details)
 - [Modeling Approach](#modeling-approach)
 - [Results](#results)
+- [Prediction](#prediction)
 - [Conclusion](#conclusion)
 
 
@@ -23,6 +24,9 @@ Image classification is a fundamental task in computer vision, where the goal is
 
 The dataset consists of 1,429 images divided into 8 classes of orange fruit diseases. The dataset was split into training (80%), validation (10%), and test (10%) sets.
 
+**Sample images:**
+![image](https://github.com/user-attachments/assets/170c6835-06e0-4261-b24a-58c3f9a60b0b)
+
 ### Number of Classes in 'Train' Split:
 - **pest_psyllid**: 19 images
 - **fungus_penicillium**: 34 images
@@ -32,6 +36,8 @@ The dataset consists of 1,429 images divided into 8 classes of orange fruit dise
 - **Greening**: 308 images
 - **healthy**: 328 images
 - **Scab**: 12 images
+  
+![classimbalance](https://github.com/user-attachments/assets/588542b3-3b4a-44d2-a99e-4161953f76cf)
 
 ### Class Imbalance
 A significant class imbalance is present in the dataset. For instance, the "healthy" class has 328 images, while the "Scab" class has only 12. This imbalance may lead to biased model performance. Data augmentation, oversampling, and class weighting were considered to address this issue.
@@ -45,7 +51,6 @@ A significant class imbalance is present in the dataset. For instance, the "heal
 3. **Need for Data Augmentation or Resampling**:
    - To mitigate the effects of class imbalance, techniques such as data augmentation for the minority classes, oversampling, or class weighting in the loss function will be considered. 
 
-
 4. **Potential for Transfer Learning**:
    - Considering the limited number of images in some classes, using a pre-trained model should help improve model performance by utilizing features learned from larger, more diverse datasets.
 
@@ -53,102 +58,21 @@ A significant class imbalance is present in the dataset. For instance, the "heal
 ### Image dimensions
 The image dimensions across different classes show significant variations in both height and width. Therefore all images will be standardized to a consistent size such as 256x256 and also cropped. Also, since only a small percentage of images are outliers are and all images will be resized, these will be left in the data.
 
-Summary statistics for pest_psyllid:
-            Height        Width
-count    19.000000    19.000000
-mean    900.842105  1218.315789
-std     700.213084  1097.097132
-min     168.000000   225.000000
-25%     364.500000   422.000000
-50%     750.000000   975.000000
-75%    1241.500000  1581.500000
-max    2412.000000  4288.000000
-
-Summary statistics for fungus_penicillium:
-            Height        Width
-count    34.000000    34.000000
-mean    537.941176   652.617647
-std     701.496579   610.625661
-min     167.000000   194.000000
-25%     185.500000   270.000000
-50%     247.000000   295.500000
-75%     549.750000   800.000000
-max    4032.000000  3024.000000
-
-Summary statistics for bacteria _citrus:
-           Height       Width
-count   23.000000   23.000000
-mean   193.565217  265.391304
-std     28.227688   36.864296
-min    148.000000  195.000000
-25%    183.000000  259.000000
-50%    191.000000  264.000000
-75%    194.000000  275.000000
-max    259.000000  341.000000
-
-Summary statistics for Canker:
-            Height        Width
-count   223.000000   223.000000
-mean    675.726457   684.932735
-std     254.847988   285.845151
-min     256.000000   256.000000
-25%     669.500000   690.000000
-50%     800.000000   800.000000
-75%     800.000000   800.000000
-max    1417.000000  1890.000000
-
-Summary statistics for Black spot:
-            Height        Width
-count   180.000000   180.000000
-mean    785.922222   791.683333
-std     196.598035   226.408823
-min     256.000000   256.000000
-25%     800.000000   800.000000
-50%     800.000000   800.000000
-75%     800.000000   800.000000
-max    2399.000000  2699.000000
-
-Summary statistics for Greening:
-            Height        Width
-count   308.000000   308.000000
-mean    788.698052   789.970779
-std     102.434422   105.309173
-min     256.000000   256.000000
-25%     800.000000   800.000000
-50%     800.000000   800.000000
-75%     800.000000   800.000000
-max    1417.000000  1520.000000
-
-Summary statistics for healthy:
-           Height       Width
-count  328.000000  328.000000
-mean   316.847561  360.853659
-std     79.150698  111.268705
-min    138.000000  144.000000
-25%    256.000000  278.500000
-50%    326.000000  352.000000
-75%    374.000000  426.000000
-max    478.000000  750.000000
-
-Summary statistics for Scab:
-            Height        Width
-count    12.000000    12.000000
-mean    802.333333   879.166667
-std     967.256226  1101.704946
-min     110.000000   112.000000
-25%     256.000000   256.000000
-50%     256.000000   256.000000
-75%     996.500000  1086.500000
-max    2399.000000  2699.000000
+<img width="214" alt="Screenshot 2024-10-03 at 1 18 31 AM" src="https://github.com/user-attachments/assets/13c3907d-888c-4c5d-961f-3b9a7cf088f1">
 
 
 ### RGB
-The code found variations in the RGB color distribution across images, with differences in the intensity and frequency of pixel values for each color channel. We normalized the images to bring the pixel values to a consistent scale, reducing the impact of these color variations and ensuring the model processes the images uniformly during training
+The code found variations in the RGB color distribution across images, with differences in the intensity and frequency of pixel values for each color channel. We normalized the images to bring the pixel values to a consistent scale, reducing the impact of these color variations and ensuring the model processes the images uniformly during training.
 
+![rgb1](https://github.com/user-attachments/assets/579161e9-8ffa-4c81-94ff-99f699984272)
+
+![rgb2](https://github.com/user-attachments/assets/b55d70cc-476c-436e-b6e0-343759a89013)
 
 ### Blurriness
 
 Number of blurry images: 438
+
+![bluiness](https://github.com/user-attachments/assets/dd529bef-2d9a-4a22-b5cd-a8160e82d280)
 
 Given that 30% of the images are blurry in the dataset, we will use CLAHE to enhance the contrast, RandomBrightnessContrast to adjust lighting, and GaussNoise to random noise to sharpen features.
 
@@ -229,6 +153,12 @@ The EfficientNet model showed near-perfect performance during training, but ther
    - **Validation Accuracy**: 94.96%
    - **Testing Accuracy**: 86.50%
 
+<img width="1145" alt="Training F1" src="https://github.com/user-attachments/assets/d542347b-0196-4866-a5e1-1137d219766a">
+
+<img width="1114" alt="Training loss" src="https://github.com/user-attachments/assets/c0ef6e04-18ba-42c5-bd83-50a88726cca9">
+
+<img width="545" alt="confusion" src="https://github.com/user-attachments/assets/660afd8b-7a4b-4d1f-bb88-16b88f715a94">
+
 EfficientNet B1 with augmentation demonstrated a slight improvement in generalization on the validation and testing datasets. There was a reduction in the overfitting observed in the non-augmented version, and testing accuracy increased to 86.50%. Precision, recall, and F1 score remained strong, confirming EfficientNet’s effectiveness in the classification task.
 
 
@@ -247,14 +177,15 @@ WfficientNet-B7, like EfficientNet B1, showed strong performance during training
 After applying augmentation, EfficientNet-B7’s validation and testing accuracy slightly decreased, but the F1 score remained consistent. This suggests that the model still has good generalization ability, but augmentation might not have had as significant an impact as with other models.
 
 ## Prediction using EfficientNet B1:
+<img width="571" alt="scab" src="https://github.com/user-attachments/assets/6b272050-f31e-4830-99e8-5d3f92f4d96e">
+
 
 ## Conclusion
 
-	•	ResNet-18 consistently underperformed relative to the EfficientNet models, even after applying augmentation, which only slightly improved its performance.
-	•	EfficientNet B1 and EfficientNet-B7 both showed much stronger performance across all datasets. , With EfficientNet B1,  while without augmentation provides slightly better precision and F1 score during testing, with augmentation better generalization with a higher testing accuracy (86.50% vs. 84.66%). Also, while precision (0.7396) and F1 score (0.7070) were slightly lower on the test set compared to the non-augmented model, the higher validation accuracy (94.96 vs. 94.24) and F1 score (0.8302 vs. 0.8252) suggest the augmented model is more robust overall.
+- ResNet-18 consistently underperformed relative to the EfficientNet models, even after applying augmentation, which only slightly improved its performance.
+- EfficientNet B1 and EfficientNet-B7 both showed much stronger performance across all datasets. With EfficientNet B1, while "without augmentation" provides slightly better precision and F1 score during testing, "with augmentation" gives a better generalization with a higher testing accuracy (86.50% vs. 84.66%). Also, while precision (0.7396) and F1 score (0.7070) were slightly lower on the test set compared to the non-augmented model, the higher validation accuracy (94.96 vs. 94.24) and F1 score (0.8302 vs. 0.8252) suggest the augmented model is more robust overall.
 
-
-EfficientNet (with augmentation) provided the most balanced performance overall, with solid generalization to the test data, making it the most suitable model for orange fruit disease classification. Based on the Confusion Matrix, the model generally performed well for most diseases like "Canker", "Greening", and "Healthy”. However, there was confusion in predicting "Scab", which is often misclassified “Bacteria_Citrus”. This suggests that the model struggles to distinguish between visually similar diseases, highlighting an area for further refinement.
+**EfficientNet (with augmentation)** provided the most balanced performance overall, with solid generalization to the test data, making it the most suitable model for orange fruit disease classification. Based on the Confusion Matrix, the model generally performed well for most diseases like "Canker", "Greening", and "Healthy”. However, there was confusion in predicting "Scab", which is often misclassified “Bacteria_Citrus”. This suggests that the model struggles to distinguish between visually similar diseases, highlighting an area for further refinement.
 
 
 
